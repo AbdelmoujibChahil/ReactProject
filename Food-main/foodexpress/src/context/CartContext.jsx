@@ -40,44 +40,55 @@ export const CartProvider = ({ children }) => {
     } 
   };
 
+  const clearCart = ()=>{
+    setCartItems([]);
+  }
 
   // Function to add an item to the cart
   const addToCart = (itemToAdd) => {
-    setCartItems(prevItems => {
-      // Check if the item is already in the cart
-      const existingItem = prevItems.find(item => item.id === itemToAdd.id);
-      
-      if (existingItem) {
-        // If it is, map over the items and increase the quantite
-        return prevItems.map(item =>
-          item.id === itemToAdd.id
-            ? { ...item, quantite: item.quantite + 1 }
-            : item //setquantite
-        );
-      }   return [...prevItems, { 
-          plat_id: itemToAdd.id,    // ID du plat
-          quantite: 1,              // Quantité dans le panier
-          plat: itemToAdd           // Garde toutes les infos du plat pour l'affichage
-        }];
-    });
-    console.log("Item added:", itemToAdd.nom);
-  };
+  setCartItems((prevItems) => {
+    // Chercher si le plat existe déjà
+    const existingItem = prevItems.find(
+      (item) => item.plat_id === itemToAdd.id
+    );
+
+    if (existingItem) {
+      // S'il existe, on augmente la quantité
+      return prevItems.map((item) =>
+        item.plat_id === itemToAdd.id
+          ? { ...item, quantite: item.quantite + 1 }
+          : item
+      );
+    } else {
+      // Sinon, on l'ajoute au panier
+      return [
+        ...prevItems,
+        {
+          plat_id: itemToAdd.id, // ID du plat
+          quantite: 1, // quantité
+          plat: itemToAdd, // toutes les infos du plat
+        },
+      ];
+    }
+  });
+};
+
 
   // Function to remove an item (we'll need this for the Cart page)
   const removeFromCart = (itemId) => {
     setCartItems(prevItems => {
-      const existingItem = prevItems.find(item => item.id === itemId);
+      const existingItem = prevItems.find(item => item.plat_id === itemId);
       
       if (existingItem && existingItem.quantite > 1) {
         // If quantite is > 1, just decrease it
         return prevItems.map(item =>
-          item.id === itemId
+          item.plat_id === itemId
             ? { ...item, quantite: item.quantite - 1 }
             : item
         );
       } else {
         // If quantite is 1 or item not found, remove it completely
-        return prevItems.filter(item => item.id !== itemId);
+        return prevItems.filter(item => item.plat_id !== itemId);
       }
     });
     console.log("Item removed/decreased:", itemId);
@@ -88,6 +99,7 @@ export const CartProvider = ({ children }) => {
 
   // The "value" is what all child components will have access to
   const value = {
+     clearCart ,
     cartItems,
     addToCart,
     removeFromCart,

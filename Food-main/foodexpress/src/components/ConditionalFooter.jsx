@@ -1,36 +1,34 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import Footer from './Footer/Footer'; // Import our real Footer component
+import Footer from './Footer/Footer';
 
 /**
- * This component's only job is to check the user's current URL
- * and decide whether to render the Footer or nothing.
+ * ConditionalFooter Component
+ * This component decides whether to show or hide the footer
+ * based on the current page URL
  */
 const ConditionalFooter = () => {
-  // 1. Get the current location object, which contains the path
   const location = useLocation();
 
-  // 2. Define the list of paths where we want the footer to be HIDDEN
-  //    Based on our plan: Login, Signup, and the entire Checkout flow.
+  // List of paths where the footer should be HIDDEN
   const hideOnPaths = [
     '/login',
     '/signup',
     '/checkout',
-    '/payment',
+    '/payment',        // ✅ ADDED - Hide footer on payment page
     '/ordersuccess'
   ];
 
-  // 3. Check if the user's current path is in our "hidden" list
+  // Check if current path is in the hidden list
   const shouldHideFooter = hideOnPaths.includes(location.pathname);
 
-  // 4. The logic:
-  // If shouldHideFooter is true, this component renders nothing (null).
-  // Otherwise, it renders our normal Footer.
+  // If footer should be hidden, return nothing
   if (shouldHideFooter) {
     return null;
-  } else {
-    return <Footer />;
   }
+
+  // Otherwise, render the full footer
+  return <Footer />;
 };
 
 export default ConditionalFooter;

@@ -9,6 +9,7 @@ const Menu = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
 const [plats,setplats]= useState([]); //recuperation des plats
+  const [sortBy, setSortBy] = useState("recommended"); // ✅ NEW: Sort state
 
 
   useEffect(()=>{
@@ -37,6 +38,19 @@ const [plats,setplats]= useState([]); //recuperation des plats
     .filter((item) => {
       // Search term filter
       return item.nom.toLowerCase().includes(searchTerm.toLowerCase());
+    }).sort((a, b) => {
+      // ✅ NEW: Sorting logic
+      if (sortBy === "recommended") {
+        // Sort by rating (highest first)
+        return b.review_count - a.review_count;  //A CHANGER VERS LE RATING FEEDBACK
+      } else if (sortBy === "price-high") {
+        // Sort by price (highest first)
+        return b.prix - a.prix;
+      } else if (sortBy === "price-low") {
+        // Sort by price (lowest first)
+        return a.prix - b.prix;
+      }
+      return 0;
     });
 
   return (
@@ -73,6 +87,24 @@ const [plats,setplats]= useState([]); //recuperation des plats
               {category.name}
             </button>
           ))}
+        </div>
+          <div className="menu-sort-container">
+          <label htmlFor="sort-select" className="sort-label">
+            Sort by:
+          </label>
+           {/* Sort Dropdown positioned under All button */}
+          <div className="menu-sort-container">
+            <select
+              id="sort-select"
+              className="menu-sort-select"
+              value={sortBy}
+              onChange={(e) => setSortBy(e.target.value)}
+            >
+              <option value="recommended">🌟 Recommended</option>
+              <option value="price-high">💰 Price: High to Low</option>
+              <option value="price-low">💸 Price: Low to High</option>
+            </select>
+          </div>
         </div>
       </div>
 

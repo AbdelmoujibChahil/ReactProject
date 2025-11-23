@@ -1,6 +1,5 @@
 // This file holds the data for your 40 food items.
-// We just use the string path, and Vite/React will handle it.
-// This is the correct and most efficient way.
+// ✅ NOW WITH RATINGS AND REVIEW COUNTS!
 
 export const foodData = [
   // --- Burgers (8 items) ---
@@ -10,6 +9,8 @@ export const foodData = [
     category: "Burgers",
     price: 8.99,
     image: "/src/assets/food/burgers/burger1.webp",
+    rating: 4.7,
+    reviewCount: 205
   },
   {
     id: "b-2",
@@ -17,6 +18,8 @@ export const foodData = [
     category: "Burgers",
     price: 9.99,
     image: "/src/assets/food/burgers/burger2.webp",
+    rating: 4.8,
+    reviewCount: 342
   },
   {
     id: "b-3",
@@ -24,6 +27,8 @@ export const foodData = [
     category: "Burgers",
     price: 10.99,
     image: "/src/assets/food/burgers/burger3.webp",
+    rating: 4.6,
+    reviewCount: 178
   },
   {
     id: "b-4",
@@ -31,6 +36,8 @@ export const foodData = [
     category: "Burgers",
     price: 12.99,
     image: "/src/assets/food/burgers/burger4.webp",
+    rating: 4.9,
+    reviewCount: 289
   },
   {
     id: "b-5",
@@ -38,6 +45,8 @@ export const foodData = [
     category: "Burgers",
     price: 10.49,
     image: "/src/assets/food/burgers/burger5.webp",
+    rating: 4.5,
+    reviewCount: 156
   },
   {
     id: "b-6",
@@ -45,6 +54,8 @@ export const foodData = [
     category: "Burgers",
     price: 9.49,
     image: "/src/assets/food/burgers/burger6.webp",
+    rating: 4.7,
+    reviewCount: 234
   },
   {
     id: "b-7",
@@ -52,6 +63,8 @@ export const foodData = [
     category: "Burgers",
     price: 8.99,
     image: "/src/assets/food/burgers/burger7.webp",
+    rating: 4.3,
+    reviewCount: 98
   },
   {
     id: "b-8",
@@ -59,6 +72,8 @@ export const foodData = [
     category: "Burgers",
     price: 11.99,
     image: "/src/assets/food/burgers/burger8.jpeg",
+    rating: 4.8,
+    reviewCount: 267
   },
 
   // --- Pizza (8 items) ---
@@ -68,6 +83,8 @@ export const foodData = [
     category: "Pizza",
     price: 12.99,
     image: "/src/assets/food/pizza/pizza1.webp",
+    rating: 4.9,
+    reviewCount: 412
   },
   {
     id: "p-2",
@@ -75,6 +92,8 @@ export const foodData = [
     category: "Pizza",
     price: 10.99,
     image: "/src/assets/food/pizza/pizza2.webp",
+    rating: 4.6,
+    reviewCount: 298
   },
   {
     id: "p-3",
@@ -82,6 +101,8 @@ export const foodData = [
     category: "Pizza",
     price: 14.99,
     image: "/src/assets/food/pizza/pizza3.webp",
+    rating: 4.8,
+    reviewCount: 356
   },
   {
     id: "p-4",
@@ -89,6 +110,8 @@ export const foodData = [
     category: "Pizza",
     price: 13.99,
     image: "/src/assets/food/pizza/pizza4.webp",
+    rating: 4.7,
+    reviewCount: 278
   },
   {
     id: "p-5",
@@ -96,6 +119,8 @@ export const foodData = [
     category: "Pizza",
     price: 11.99,
     image: "/src/assets/food/pizza/pizza5.webp",
+    rating: 4.4,
+    reviewCount: 167
   },
   {
     id: "p-6",
@@ -103,6 +128,8 @@ export const foodData = [
     category: "Pizza",
     price: 12.49,
     image: "/src/assets/food/pizza/pizza6.webp",
+    rating: 4.3,
+    reviewCount: 189
   },
   {
     id: "p-7",
@@ -110,6 +137,8 @@ export const foodData = [
     category: "Pizza",
     price: 15.99,
     image: "/src/assets/food/pizza/pizza7.webp",
+    rating: 4.9,
+    reviewCount: 445
   },
   {
     id: "p-8",
@@ -117,6 +146,8 @@ export const foodData = [
     category: "Pizza",
     price: 13.99,
     image: "/src/assets/food/pizza/pizza8.webp",
+    rating: 4.6,
+    reviewCount: 223
   },
 
   // --- Sandwich (8 items) ---
@@ -126,6 +157,8 @@ export const foodData = [
     category: "Sandwich",
     price: 9.99,
     image: "/src/assets/food/sandwich/sandwich1.webp",
+    rating: 4.5,
+    reviewCount: 187
   },
   {
     id: "s-2",
@@ -133,6 +166,8 @@ export const foodData = [
     category: "Sandwich",
     price: 8.49,
     image: "/src/assets/food/sandwich/sandwich2.webp",
+    rating: 4.6,
+    reviewCount: 234
   },
   {
     id: "s-3",
@@ -140,6 +175,8 @@ export const foodData = [
     category: "Sandwich",
     price: 8.99,
     image: "/src/assets/food/sandwich/sandwich3.webp",
+    rating: 4.4,
+    reviewCount: 156
   },
   {
     id: "s-4",
@@ -147,6 +184,8 @@ export const foodData = [
     category: "Sandwich",
     price: 11.99,
     image: "/src/assets/food/sandwich/sandwich4.webp",
+    rating: 4.8,
+    reviewCount: 312
   },
   {
     id: "s-5",
@@ -154,6 +193,8 @@ export const foodData = [
     category: "Sandwich",
     price: 6.99,
     image: "/src/assets/food/sandwich/sandwich5.webp",
+    rating: 4.7,
+    reviewCount: 289
   },
   {
     id: "s-6",
@@ -161,6 +202,8 @@ export const foodData = [
     category: "Sandwich",
     price: 10.99,
     image: "/src/assets/food/sandwich/sandwich6.webp",
+    rating: 4.5,
+    reviewCount: 178
   },
   {
     id: "s-7",
@@ -168,6 +211,8 @@ export const foodData = [
     category: "Sandwich",
     price: 7.99,
     image: "/src/assets/food/sandwich/sandwich7.webp",
+    rating: 4.2,
+    reviewCount: 98
   },
   {
     id: "s-8",
@@ -175,6 +220,8 @@ export const foodData = [
     category: "Sandwich",
     price: 9.49,
     image: "/src/assets/food/sandwich/sandwich8.webp",
+    rating: 4.6,
+    reviewCount: 245
   },
 
   // --- Tacos (8 items) ---
@@ -184,6 +231,8 @@ export const foodData = [
     category: "Tacos",
     price: 3.49,
     image: "/src/assets/food/tacos/tacos1.webp",
+    rating: 4.6,
+    reviewCount: 267
   },
   {
     id: "t-2",
@@ -191,6 +240,8 @@ export const foodData = [
     category: "Tacos",
     price: 3.29,
     image: "/src/assets/food/tacos/tacos2.webp",
+    rating: 4.7,
+    reviewCount: 312
   },
   {
     id: "t-3",
@@ -198,6 +249,8 @@ export const foodData = [
     category: "Tacos",
     price: 3.99,
     image: "/src/assets/food/tacos/tacos3.webp",
+    rating: 4.8,
+    reviewCount: 289
   },
   {
     id: "t-4",
@@ -205,6 +258,8 @@ export const foodData = [
     category: "Tacos",
     price: 4.49,
     image: "/src/assets/food/tacos/tacos4.webp",
+    rating: 4.7,
+    reviewCount: 234
   },
   {
     id: "t-5",
@@ -212,6 +267,8 @@ export const foodData = [
     category: "Tacos",
     price: 2.99,
     image: "/src/assets/food/tacos/tacos5.webp",
+    rating: 4.3,
+    reviewCount: 145
   },
   {
     id: "t-6",
@@ -219,6 +276,8 @@ export const foodData = [
     category: "Tacos",
     price: 3.79,
     image: "/src/assets/food/tacos/tacos6.webp",
+    rating: 4.8,
+    reviewCount: 298
   },
   {
     id: "t-7",
@@ -226,6 +285,8 @@ export const foodData = [
     category: "Tacos",
     price: 3.79,
     image: "/src/assets/food/tacos/tacos7.jpeg",
+    rating: 4.9,
+    reviewCount: 356
   },
   {
     id: "t-8",
@@ -233,6 +294,8 @@ export const foodData = [
     category: "Tacos",
     price: 2.49,
     image: "/src/assets/food/tacos/tacos8.jpeg",
+    rating: 4.1,
+    reviewCount: 89
   },
 
   // --- Chicken (8 items) ---
@@ -242,6 +305,8 @@ export const foodData = [
     category: "Chicken",
     price: 7.99,
     image: "/src/assets/food/chicken/chicken1.webp",
+    rating: 4.8,
+    reviewCount: 378
   },
   {
     id: "c-2",
@@ -249,6 +314,8 @@ export const foodData = [
     category: "Chicken",
     price: 8.99,
     image: "/src/assets/food/chicken/chicken2.webp",
+    rating: 4.9,
+    reviewCount: 445
   },
   {
     id: "c-3",
@@ -256,6 +323,8 @@ export const foodData = [
     category: "Chicken",
     price: 6.99,
     image: "/src/assets/food/chicken/chicken3.webp",
+    rating: 4.7,
+    reviewCount: 312
   },
   {
     id: "c-4",
@@ -263,6 +332,8 @@ export const foodData = [
     category: "Chicken",
     price: 9.99,
     image: "/src/assets/food/chicken/chicken4.webp",
+    rating: 4.6,
+    reviewCount: 267
   },
   {
     id: "c-5",
@@ -270,6 +341,8 @@ export const foodData = [
     category: "Chicken",
     price: 10.99,
     image: "/src/assets/food/chicken/chicken5.webp",
+    rating: 4.8,
+    reviewCount: 334
   },
   {
     id: "c-6",
@@ -277,6 +350,8 @@ export const foodData = [
     category: "Chicken",
     price: 9.49,
     image: "/src/assets/food/chicken/chicken6.webp",
+    rating: 4.9,
+    reviewCount: 412
   },
   {
     id: "c-7",
@@ -284,6 +359,8 @@ export const foodData = [
     category: "Chicken",
     price: 5.99,
     image: "/src/assets/food/chicken/chicken7.webp",
+    rating: 4.5,
+    reviewCount: 223
   },
   {
     id: "c-8",
@@ -291,5 +368,7 @@ export const foodData = [
     category: "Chicken",
     price: 11.99,
     image: "/src/assets/food/chicken/chicken8.webp",
+    rating: 4.9,
+    reviewCount: 389
   },
 ];

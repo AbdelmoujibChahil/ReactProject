@@ -14,9 +14,9 @@ const Header = () => {
   // Define the special offer item
   const offerItem = {
     id: "offer-1",
-    name: "Special Offer Burger",
+    nom: "Special Offer Burger",
     category: "Burgers",
-    price: 7.99,
+    prix: 7.99,
     image: "/src/assets/food/burgers/burger1.webp",
   };
 
