@@ -81,7 +81,7 @@ const LockIcon = () => (
 
 const ProfilePage = () => {
   const navigate = useNavigate();
-  const { currentUser, logout } = useAuth();
+  const { currentUser, logout,user } = useAuth();
   const { orders, clearOrderNotification } = useOrder();
   
   // Local state

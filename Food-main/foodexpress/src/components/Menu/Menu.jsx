@@ -1,30 +1,41 @@
 import React, { useEffect, useState } from "react";
 import "./Menu.css";
 import { categoryData } from "../../data/categoryData";
-//import { foodData } from "../../data/foodData";
 import FoodItem from "../FoodItem/FoodItem";
-import {ClientApi} from "../../ClientApi/ClientApi";
+import { ClientApi } from "../../ClientApi/ClientApi";
 
 const Menu = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
-const [plats,setplats]= useState([]); //recuperation des plats
-  const [sortBy, setSortBy] = useState("recommended"); // ✅ NEW: Sort state
+  const [plats, setPlats] = useState([]);
+  const [categories, setcategories] = useState([]); 
+  const [sortBy, setSortBy] = useState("recommended");
+  const [loading, setloading] = useState(true);
+
+ useEffect(() => {
+  const fetchData = async () => {
+    try {
+      const catRes = await ClientApi.getCategories();
+      console.log(catRes.data.categories); 
+
+      // Ici, extraire le tableau
+      const cats = Array.isArray(catRes.data.categories) ? catRes.data.categories : [];
+      setcategories(cats);
+
+      const platsRes = await ClientApi.GetPlats();
+      setPlats(platsRes.data);
+      console.log(plats)
+    } catch (err) {
+      console.error("Erreur API:", err);
+    } finally {
+      setloading(false);
+    }
+  };
+
+  fetchData();
+}, []);
 
 
-  useEffect(()=>{
-  const fetchUser = async () => {
-      try {
-        const response = await ClientApi.GetPlats();  
-        console.log(response.data)
-        setplats(response.data);  
-      } catch (err) {
-        console.error("Erreur lors de la récupération des plats:", err);
-      } 
-    };
-
-    fetchUser()
-  },[])
 
   // Filter the food
   const filteredFood = plats
@@ -33,21 +44,19 @@ const [plats,setplats]= useState([]); //recuperation des plats
       if (selectedCategory === "All") {
         return true;
       }
-      return item.category === selectedCategory;
+      return item.category?.nom === selectedCategory;
     })
     .filter((item) => {
       // Search term filter
       return item.nom.toLowerCase().includes(searchTerm.toLowerCase());
-    }).sort((a, b) => {
-      // ✅ NEW: Sorting logic
+    })
+    .sort((a, b) => {
+      // Sorting logic
       if (sortBy === "recommended") {
-        // Sort by rating (highest first)
-        return b.review_count - a.review_count;  //A CHANGER VERS LE RATING FEEDBACK
+        return b.review_count - a.review_count;
       } else if (sortBy === "price-high") {
-        // Sort by price (highest first)
         return b.prix - a.prix;
       } else if (sortBy === "price-low") {
-        // Sort by price (lowest first)
         return a.prix - b.prix;
       }
       return 0;
@@ -75,36 +84,33 @@ const [plats,setplats]= useState([]); //recuperation des plats
           >
             All
           </button>
-          {categoryData.map((category) => (
+          {categories.map((category) => (
             <button
               key={category.id}
               className={`category-btn ${
-                selectedCategory === category.name ? "active" : ""
+                selectedCategory === category.nom ? "active" : ""
               }`}
-              onClick={() => setSelectedCategory(category.name)}
+              onClick={() => setSelectedCategory(category.nom)}
             >
-              <img src={category.image} alt={category.name} />
-              {category.name}
+              <img src={category.image} alt={category.nom} />
+              {category.nom}
             </button>
           ))}
         </div>
-          <div className="menu-sort-container">
+        <div className="menu-sort-container">
           <label htmlFor="sort-select" className="sort-label">
             Sort by:
           </label>
-           {/* Sort Dropdown positioned under All button */}
-          <div className="menu-sort-container">
-            <select
-              id="sort-select"
-              className="menu-sort-select"
-              value={sortBy}
-              onChange={(e) => setSortBy(e.target.value)}
-            >
-              <option value="recommended">🌟 Recommended</option>
-              <option value="price-high">💰 Price: High to Low</option>
-              <option value="price-low">💸 Price: Low to High</option>
-            </select>
-          </div>
+          <select
+            id="sort-select"
+            className="menu-sort-select"
+            value={sortBy}
+            onChange={(e) => setSortBy(e.target.value)}
+          >
+            <option value="recommended">🌟 Recommended</option>
+            <option value="price-high">💰 Price: High to Low</option>
+            <option value="price-low">💸 Price: Low to High</option>
+          </select>
         </div>
       </div>
 

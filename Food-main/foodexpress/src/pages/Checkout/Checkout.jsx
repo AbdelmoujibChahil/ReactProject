@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { useCart } from "../../context/CartContext";
@@ -109,6 +109,14 @@ const OrderSummaryBox = () => {
 // ============================================
 
 const CheckoutPage = () => {
+    const { cartItems} = useCart();
+
+  useEffect(() => {
+  if (cartItems.length === 0) {
+    navigate("/cart");
+  }
+}, [cartItems]);
+
   const navigate = useNavigate();
   const { user } = useAuth();
   // Form state
@@ -228,7 +236,7 @@ const CheckoutPage = () => {
                 placeholder="+212 6XX-XXXXXX"
                 required
               />
-              {errors.phone && <p className="errors">{errors.phone[0]}</p>}
+              {errors.phone && <p className="error-text">{errors.phone[0]}</p>}
             </div>
 
             {/* Address with Location Button */}
@@ -246,7 +254,7 @@ const CheckoutPage = () => {
                   placeholder="Enter your street address"
                   required
                 />
-                 {errors.street_address && <p className="errors">{errors.street_address[0]}</p>}
+                 {errors.street_address && <p className="error-text">{errors.street_address[0]}</p>}
 
                 <button
                   type="button"

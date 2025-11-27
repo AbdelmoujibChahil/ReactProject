@@ -21,12 +21,14 @@
 
 .profile-header {
   text-align: center;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
 }
 
 .profile-avatar {
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height: 60px;
   background: linear-gradient(135deg, #ff6b35, #f7931e);
   border-radius: 50%;
   display: flex;

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../../context/CartContext";
 import { useOrder } from "../../context/OrderContext";
@@ -121,6 +121,7 @@ const OrderSummaryBox = () => {
 // ============================================
 
 const PaymentPage = () => {
+  
    
 const [clientSecret, setClientSecret] = useState("");
  const navigate = useNavigate();
@@ -128,13 +129,22 @@ const [clientSecret, setClientSecret] = useState("");
   const { placeOrder,IdLivraison,Idcommande } = useOrder();
   // Payment method state
   const [paymentMethod, setPaymentMethod] = useState('cash'); // 'cash' or 'card'
-  
-  // Card form state (only used if card is selected)
-  const [cardNumber, setCardNumber] = useState('');
-  const [cardName, setCardName] = useState('');
-  const [cardExpiry, setCardExpiry] = useState('');
-  const [cardCvv, setCardCvv] = useState('');
-  
+  useEffect(() => {
+  // le panier doit exister
+  if (cartItems.length === 0) {
+    navigate("/cart");
+    return;
+  }
+
+  // l'adresse de livraison doit être sélectionnée
+  if (!IdLivraison) {
+    navigate("/checkout");
+    return;
+  }
+}, []);
+
+
+  const [paymentdata,setpaymentdata]= useState();
   // Loading state
   const [isProcessing, setIsProcessing] = useState(false);
 
@@ -159,6 +169,8 @@ const completeOrder = async (status) => {
     const IDcmd  = await placeOrder(orderData);
     
 console.log('commande id ::'+IDcmd);
+ 
+
     // 2. UPDATE STATUS
     try {
      const response =  await ClientApi.PatchStatus({
@@ -185,13 +197,13 @@ console.log('commande id ::'+IDcmd);
     console.log("PayPal success:", order);
 
     // Vérifier la transaction PayPal côté backend
-    await axios.post("http://localhost:8000/api/paypal/verify", {
+   const respons = await axios.post("http://localhost:8000/api/paypal/verify", {
       orderID: order.id,
       amount: order.purchase_units[0].amount.value,
     });
- 
-    // FINALISER COMMANDE (status = payé)
-    await completeOrder("payé");
+      console.log(respons.data);
+    // FINALISER COMMANDE 
+    await completeOrder("card");
   };
 
   // -------------------------------------------------------------

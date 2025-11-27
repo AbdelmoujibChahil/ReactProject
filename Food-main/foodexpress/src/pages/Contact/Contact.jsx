@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Contact.css";
+import { ClientApi } from "../../ClientApi/ClientApi";
 
 // Icons
 const PhoneIcon = () => (
@@ -121,7 +122,7 @@ const Contact = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
 
     // Simulate form submission
@@ -135,9 +136,15 @@ const Contact = () => {
       message: "",
     });
 
+   try {
+    const res = await ClientApi.report(formData);
+   } catch (error) {
+    console.log(error);
+   }
+     
     // Show success message
     setShowSuccess(true);
-
+   
     // Hide success message after 5 seconds
     setTimeout(() => {
       setShowSuccess(false);

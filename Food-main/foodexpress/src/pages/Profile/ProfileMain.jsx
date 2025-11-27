@@ -38,13 +38,34 @@ const ArrowIcon = () => (
   </svg>
 );
 
+const LogoutIcon = () => (
+  <svg
+    width="20"
+    height="20"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+  >
+    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+    <polyline points="16 17 21 12 16 7" />
+    <line x1="21" y1="12" x2="9" y2="12" />
+  </svg>
+);
+
 const ProfileMain = () => {
   const navigate = useNavigate();
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
+
+  // Handle logout
+  const handleLogout = () => {
+    logout();
+    navigate("/");
+  };
 
   // Get first letter of username for avatar
   const getInitial = () => {
-    return user?.username ? user.username.charAt(0).toUpperCase() : "U";
+    return user?.name ? user.name.charAt(0).toUpperCase() : "U";
   };
 
   return (
@@ -53,11 +74,13 @@ const ProfileMain = () => {
         {/* Profile Header */}
         <div className="profile-header">
           <div className="profile-avatar">{getInitial()}</div>
-          <h2 className="profile-username">{user?.username || "User"}</h2>
+          <h2 className="profile-username">{user?.name || "User"}</h2>
           <nav className="profile-breadcrumb">
             <span className="breadcrumb-current">Profile</span>
           </nav>
         </div>
+
+        
 
         {/* Main Navigation Cards */}
         <div className="profile-cards">
@@ -114,6 +137,20 @@ const ProfileMain = () => {
               </div>
             </div>
           </div>
+
+          {/* Logout Hub Section */}
+        <div className="logout-hub-section">
+          <button className="logout-hub-btn" onClick={handleLogout}>
+            <div className="logout-hub-icon">
+              <LogoutIcon />
+            </div>
+            <div className="logout-hub-content">
+              <h3 className="logout-hub-title">Sign Out</h3>
+              <p className="logout-hub-subtitle">Logout from your account</p>
+            </div>
+            <div className="logout-hub-arrow">→</div>
+          </button>
+        </div>
         </div>
       </div>
     </div>

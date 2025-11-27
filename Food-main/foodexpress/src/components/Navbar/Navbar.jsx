@@ -123,6 +123,13 @@ const Navbar = () => {
               Contact
             </Link>
           </li>
+              {isLoggedIn && user.role=='admin' && (
+            <li>
+              <Link to="/admin/dashboard" onClick={() => setMenuOpen(false)}>
+                Admin
+              </Link>
+            </li>
+          )}
         </ul>
         <div className="navbar-actions">
           <Link to="/cart" className="navbar-cart">

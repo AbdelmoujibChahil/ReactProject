@@ -1,4 +1,3 @@
-
 /* ========================================
    PROFILE PAGE CONTAINER
    ======================================== */
@@ -42,7 +41,9 @@
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .profile-loading p {
@@ -76,6 +77,114 @@
   background-color: var(--primary-orange);
   border-color: var(--primary-orange);
   color: white;
+}
+
+.logout-tab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: #f8f9fa !important;
+  border-color: #dc3545 !important;
+  color: #dc3545 !important;
+}
+
+.logout-tab:hover {
+  background-color: #dc3545 !important;
+  color: white !important;
+}
+
+/* ========================================
+   LOGOUT HUB SECTION
+   ======================================== */
+
+.logout-hub-section {
+  margin-bottom: 2rem;
+}
+
+.logout-hub-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #ffffff, #f8f9fa);
+  border: 2px solid #e2e8f0;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+.logout-hub-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(220, 53, 69, 0.05),
+    transparent
+  );
+  transition: left 0.5s;
+}
+
+.logout-hub-btn:hover::before {
+  left: 100%;
+}
+
+.logout-hub-btn:hover {
+  border-color: #dc3545;
+  box-shadow: 0 8px 25px rgba(220, 53, 69, 0.15);
+  transform: translateY(-2px);
+}
+
+.logout-hub-icon {
+  flex-shrink: 0;
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, #dc3545, #c82333);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.25rem;
+}
+
+.logout-hub-content {
+  flex: 1;
+  text-align: left;
+}
+
+.logout-hub-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--primary-dark);
+  margin: 0 0 0.25rem 0;
+}
+
+.logout-hub-subtitle {
+  font-size: 0.9rem;
+  color: #64748b;
+  margin: 0;
+}
+
+.logout-hub-arrow {
+  flex-shrink: 0;
+  font-size: 1.5rem;
+  color: #94a3b8;
+  transition: all 0.3s ease;
+}
+
+.logout-hub-btn:hover .logout-hub-arrow {
+  color: #dc3545;
+  transform: translateX(5px);
 }
 
 /* ========================================
@@ -319,7 +428,8 @@
 }
 
 @keyframes float {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0);
   }
   50% {
@@ -479,7 +589,8 @@
 }
 
 @keyframes pulse-badge {
-  0%, 100% {
+  0%,
+  100% {
     box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
   }
   50% {
@@ -510,14 +621,42 @@
 
 .order-item {
   display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.order-item:last-child {
+  border-bottom: none;
+}
+
+.item-image-container {
+  flex-shrink: 0;
+  width: 50px;
+  height: 50px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+}
+
+.item-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.item-details {
+  flex: 1;
+  display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.5rem 0;
 }
 
 .item-name {
   color: var(--primary-dark);
   font-size: 0.95rem;
+  font-weight: 500;
 }
 
 .item-price {
@@ -591,8 +730,12 @@
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .modal-content {
@@ -690,6 +833,35 @@
   /* Show mobile tabs */
   .profile-mobile-tabs {
     display: flex;
+  }
+
+  .mobile-tab {
+    font-size: 0.9rem;
+    padding: 0.75rem 0.5rem;
+  }
+
+  /* Logout hub mobile styles */
+  .logout-hub-section {
+    margin-bottom: 1.5rem;
+  }
+
+  .logout-hub-btn {
+    padding: 1.25rem;
+    border-radius: 12px;
+  }
+
+  .logout-hub-icon {
+    width: 45px;
+    height: 45px;
+    font-size: 1.1rem;
+  }
+
+  .logout-hub-title {
+    font-size: 1.1rem;
+  }
+
+  .logout-hub-subtitle {
+    font-size: 0.85rem;
   }
 
   /* Hide sections by default on mobile */

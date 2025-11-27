@@ -1,6 +1,6 @@
-import React from 'react';
-import { useLocation } from 'react-router-dom';
-import Footer from './Footer/Footer';
+import React from "react";
+import { useLocation } from "react-router-dom";
+import Footer from "./Footer/Footer";
 
 /**
  * ConditionalFooter Component
@@ -12,15 +12,24 @@ const ConditionalFooter = () => {
 
   // List of paths where the footer should be HIDDEN
   const hideOnPaths = [
-    '/login',
-    '/signup',
-    '/checkout',
-    '/payment',        // ✅ ADDED - Hide footer on payment page
-    '/ordersuccess'
+    "/login",
+    "/signup",
+    "/checkout",
+    "/payment",
+    "/ordersuccess",
+    "/admin/dashboard",
+    "/admin/orders",
+    "/admin/menu",
+    "/admin/customers",
+    "/admin/deliveries",
+    "/admin/drivers",
+    "/admin/analytics",
   ];
 
-  // Check if current path is in the hidden list
-  const shouldHideFooter = hideOnPaths.includes(location.pathname);
+  // Check if current path is in the hidden list or starts with /admin/
+  const shouldHideFooter =
+    hideOnPaths.includes(location.pathname) ||
+    location.pathname.startsWith("/admin/");
 
   // If footer should be hidden, return nothing
   if (shouldHideFooter) {
