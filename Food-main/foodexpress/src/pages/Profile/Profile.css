@@ -221,8 +221,8 @@
 
 /* Profile Avatar */
 .profile-avatar {
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height:60px;
   border-radius: 50%;
   background: linear-gradient(135deg, var(--primary-orange) 0%, #d66a1f 100%);
   color: white;

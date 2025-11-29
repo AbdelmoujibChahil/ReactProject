@@ -697,7 +697,7 @@ const DriversManagement = () => {
 
             <div className="modal-body">
               <div className="form-group">
-                <label>Driver Name *</label>
+                <label>Driver Name </label>
                 <input
                   type="text"
                   value={formData.name}

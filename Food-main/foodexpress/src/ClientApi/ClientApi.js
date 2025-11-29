@@ -22,9 +22,14 @@ Register: async(name,email,password,password_confirmation)=>{
     return await api.get('/api/plats');
   },
 
-  PostPlats:async(data)=>{
-    return await api.post('/api/admin/plats',data);
-  },
+ PostPlats: async (data) => {
+  return await api.post('/api/admin/plats', data, {
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }
+  });
+},
+
    Logout:async()=>{
     return await api.post('/api/logout');
   },
@@ -59,9 +64,13 @@ PatchStatusCommande: async (id,statut) => {
    return await    api.patch('/api/modifier-phone', { phone })},
     updatePassword: async(data) =>{
    return await    api.patch('/api/modifier-password',  data )},
-
+//Pour affichage d un clien
    getCommandeClient : async() =>{
-   return await   api.get(`/api/admin/commande-client`)},
+   return await   api.get(`/api/commande-client`)},
+
+ //Pour affichage de toute les commandes
+getCommandeClients : async() =>{
+   return await   api.get(`/api/admin/commande-clients`)},
 
    incrementeRreviewCount:async (id)=>{
     return await api.post(`/api/plats/${id}/review`);
@@ -84,8 +93,7 @@ PatchStatusCommande: async (id,statut) => {
 },
 
 UpdatePlat :  async (id,data) => {
-  return await api.put(`/api/admin/plats/${id}`,data);
-},
+  return await api.put(`/api/admin/plats/${id}`,data)},
 DeletePlat :  async (id) => {
   return await api.delete(`/api/admin/plats/${id}`);
 },
@@ -155,18 +163,23 @@ getStatistics:async (period) => {return await api.get("/api/analytics/stats", { 
   getCustomerMetrics:async (period) => {return await api.get("/api/analytics/customer-metrics", { params: { period } })},
   getExportReport: async(period) => {return await api.get("/api/analytics/export-report", { params: { period } })},
 
-availableDrivers: async ()=>{
- return await api.get(`/api/drivers/available`);
+availableDrivers: async (params = {})=>{
+ return await api.get(`/api/drivers/available/`,{
+                params: params 
+            });
 },
 assignToOrder: async (data)=>{
  return await api.post(`/api/drivers/assign`,data);
 },
-
+getAllDeliveries: async ()=>{
+ return await api.get(`/api/AllDeliveries`);
+},
 /* Route::get('/dashboard', [DriverController::class, 'dashboard']);
     Route::get('/available', [DriverController::class, 'getAvailableDrivers']);
     Route::get('/', [DriverController::class, 'index']);
     Route::post('/', [DriverController::class, 'store']);
-    Route::get('/{id}', [DriverController::class, 'show']);
+    Route::get('/{id}', [DriverController::class, 'show']); updatestatus
+    commande
     Route::put('/{id}', [DriverController::class, 'update']);
     Route::delete('/{id}', [DriverController::class, 'destroy']);
     Route::patch('/{id}/status', [DriverController::class, 'updateStatus']);

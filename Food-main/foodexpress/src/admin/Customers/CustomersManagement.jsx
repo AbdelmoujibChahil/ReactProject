@@ -21,6 +21,7 @@ import {
   FaBan,
   FaCheckCircle,
   FaCrown,
+    FaEdit,
   FaHeart,
   FaChartLine,
   FaGift,
@@ -705,11 +706,15 @@ const [form, setform] = useState({
                           <div className="stat-box">
                             <FaCalendar />
                             <div>
-                              <span className="stat-number">
-                                {new Date(
-                                  selectedCustomer.lastOrder
-                                ).toLocaleDateString()}
-                              </span>
+                            <span className="stat-number">
+  {selectedCustomer.lastOrder
+    ? new Date(selectedCustomer.lastOrder).toLocaleDateString('fr-FR', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+      })
+    : "Aucune commande"}
+</span>
                               <span className="stat-text">Last Order</span>
                             </div>
                           </div>

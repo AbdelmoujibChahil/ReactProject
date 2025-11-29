@@ -47,7 +47,6 @@ const DeliveriesManagement = () => {
 
   // Mapping des statuts backend vers frontend
   const statusMap = {
-    'en attente': 'Pending',
     'pending': 'Pending',
     'en cours': 'Preparing',
     'preparing': 'Preparing',
@@ -136,29 +135,24 @@ const DeliveriesManagement = () => {
     }
   };
 
-  // Charger les livreurs disponibles (appelé quand on ouvre le modal)
- // Charger les livreurs disponibles (appelé quand on ouvre le modal)
-const fetchAvailableDrivers = async () => {
+
+const fetchAvailableDrivers = async (orderId) => {
     setLoadingDrivers(true);
     setError(null);
 
     try {
-        const response = await ClientApi.availableDrivers();
+        const response = await ClientApi.availableDrivers({ commande_id: orderId });
         console.log("Available drivers (response):", response);
-
-        // --- CORRECTION APPLIQUÉE ICI ---
         const driversData = response?.data; // Déclare la variable pour plus de clarté
 
         if (driversData?.drivers?.length > 0) {
-            const formattedDrivers = driversData.drivers.map(driver => ({ // Utilisation de driversData (qui est response.data)
+            const formattedDrivers = driversData.drivers.map(driver => ({ 
                 id: driver.id,
                 name: driver.user.name || '',
                 initials: driver.user.name.charAt(0) || '',
                 phone: driver.user.phone || '',
                 vehicle: vehicleMap[driver.vehicle_type] || driver.vehicle_type,
                 rating: driver.rating || '0.0',
-                // J'utilise ici 'available' pour correspondre à votre code initial, 
-                // mais assurez-vous que c'est bien le nom de la propriété renvoyée par l'API.
                 active: driver.statut === 'active' && driver.available === 1, 
                 currentDeliveries: driver.total_deliveries || 0,
                 vehiclePlate: driver.vehicle_plate || '',
@@ -183,10 +177,10 @@ const fetchAvailableDrivers = async () => {
   // Ouvrir le modal et charger les livreurs
   const openAssignModal = (orderId) => {
     setAssignModal(orderId);
-    fetchAvailableDrivers();
+    fetchAvailableDrivers(orderId);
   };
 
-  // Assigner un livreur à une commande
+  // Assigner un livreur à une commande Assigned Driver	
 const handleAssignDriver = async (orderId, driverId) => {
   setAssigningDriver(true);
   setError(null);

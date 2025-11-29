@@ -21,7 +21,8 @@ import Analytics from "./admin/Analytics/Analytics";
 import DeliveriesManagement from "./admin/Deliveries/DeliveriesManagement";
 import DriversManagement from "./admin/Drivers/DriversManagement";
 import ReportsManagement from "./admin/Reports/ReportsManagement";
-
+import Assigned from "./driver/Assigned/Assigned";
+import History from "./driver/History/History";
 import {
   BrowserRouter,
   Routes,
@@ -245,6 +246,24 @@ function App() {
                   {/* Contact Page Route */}
                   <Route path="/contact" element={<Contact />} />
 
+
+                  {/* Driver Routes */}
+                  <Route
+                    path="/driver/assigned"
+                    element={
+                      <ProtectedRoute>
+                        <Assigned />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/driver/history"
+                    element={
+                      <ProtectedRoute>
+                        <History />
+                      </ProtectedRoute>
+                    }
+                  />
                   {/* TODO: Add order success route if needed */}
                   {/* 
                   <Route

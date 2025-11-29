@@ -137,7 +137,7 @@ function OrdersAdmin() {
     setError(null);
 
     try {
-      const response = await ClientApi.getCommandeClient();
+      const response = await ClientApi.getCommandeClients();
       
       const ordersApi = response.data;
 

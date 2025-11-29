@@ -139,33 +139,34 @@ const MenuManagement = () => {
   });
 
   // AJOUTER UN PLAT
-  const handleAddItem = async (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    
-    const newPlat = {
-      nom: formData.get('name'),
-      category_id: formData.get('category'),
-      prix: parseFloat(formData.get('price')),
-      description: formData.get('description'),
-      discount: parseInt(formData.get('discount')) || 0,
-      image: formData.get('image'),
-      isAvailable: formData.get('isAvailable') === 'on',
-      isPopular: formData.get('isPopular') === 'on',
-      isFeatured: formData.get('isFeatured') === 'on',
-    };
+ const handleAddItem = async (e) => {
+  e.preventDefault();
 
-    try {
-      await ClientApi.PostPlats(newPlat);
-      setShowAddModal(false);
-      fetchData();
-      e.target.reset(); 
-      alert('Plat ajouté avec succès !');
-    } catch (err) {
-      console.error('Erreur ajout:', err);
-      alert('Erreur lors de l\'ajout du plat');
-    }
-  };
+  const formData = new FormData();
+  formData.append("nom", e.target.name.value);
+  formData.append("category_id", e.target.category.value);
+  formData.append("prix", e.target.price.value);
+  formData.append("description", e.target.description.value);
+  formData.append("discount", e.target.discount.value || 0);
+  formData.append("isAvailable", e.target.isAvailable.checked ? 1 : 0);
+  formData.append("isPopular", e.target.isPopular.checked ? 1 : 0);
+  formData.append("isFeatured", e.target.isFeatured.checked ? 1 : 0);
+
+  // **Fichier image**
+  formData.append("image", e.target.image.files[0]);
+
+  try {
+    await ClientApi.PostPlats(formData, true); // true si tu veux préciser multipart
+    setShowAddModal(false);
+    fetchData();
+    e.target.reset();
+    alert("Plat ajouté avec succès !");
+  } catch (err) {
+    console.error("Erreur ajout:", err);
+    alert("Erreur lors de l'ajout du plat");
+  }
+};
+
 
   // MODIFIER UN PLAT
   const handleEditItem = (item) => {
@@ -608,7 +609,7 @@ const MenuManagement = () => {
 
                       <div className="form-group">
                         <label>Image URL</label>
-                        <input type="text" name="image" placeholder="Enter image URL" />
+                        <input type="file" name="image" accept="image/*" required />
                       </div>
 
                       <div className="form-group full-width">
