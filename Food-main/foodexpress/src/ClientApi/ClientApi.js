@@ -152,16 +152,6 @@ deleteReport: async (id)=>{
  return await api.delete(`/api/reports/${id}`);
 },
 
-//ANALYTICS
-
-getStatistics:async (period) => {return await api.get("/api/analytics/stats", { params: { period } })},
-  getTrendRevenue:async (period) => {return await api.get("/api/analytics/revenue-trends", { params: { period } })},
-  getTopCategories:async (period) => {return await api.get("/api/analytics/top-categories", { params: { period } })},
-  getPaymentMethods:async (period) => {return await api.get("/api/analytics/payment-methods", { params: { period } })},
-  getTopProducts:async (limit = 5) => {return await api.get("/api/analytics/top-products", { params: { limit } })},
-  getPeakHours: async() =>{ return await api.get("/api/analytics/peak-hours")},
-  getCustomerMetrics:async (period) => {return await api.get("/api/analytics/customer-metrics", { params: { period } })},
-  getExportReport: async(period) => {return await api.get("/api/analytics/export-report", { params: { period } })},
 
 availableDrivers: async (params = {})=>{
  return await api.get(`/api/drivers/available/`,{

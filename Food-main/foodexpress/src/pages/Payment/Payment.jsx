@@ -162,7 +162,7 @@ const completeOrder = async (status) => {
         plat_id: item.plat_id,
         quantite: item.quantite,
       })),
-      paymentMethod: paymentMethod === "cash" ? "cash" : "credit",
+      paymentMethod: paymentMethod === "cash" ? "cash" : "online",
     };
 
     // 1. CREATE ORDER IN DB
@@ -203,7 +203,7 @@ console.log('commande id ::'+IDcmd);
     });
       console.log(respons.data);
     // FINALISER COMMANDE 
-    await completeOrder("card");
+    await completeOrder("Pending");
   };
 
   // -------------------------------------------------------------
@@ -212,8 +212,8 @@ console.log('commande id ::'+IDcmd);
   const handlePlaceOrder = async () => {
     if (paymentMethod !== "cash") return; // IMPORTANT
 
-    // FINALISER COMMANDE (status = en attente)
-    await completeOrder("en attente");
+    // FINALISER COMMANDE (status = Pending)
+    await completeOrder("Pending");
   };
 
   // Format card number with spaces
@@ -264,8 +264,8 @@ console.log('commande id ::'+IDcmd);
 
             {/* OPTION 2: Credit/Debit Card */}
             <div 
-              className={`payment-option ${paymentMethod === 'card' ? 'active' : ''}`}
-              onClick={() => setPaymentMethod('card')}
+              className={`payment-option ${paymentMethod === 'online' ? 'active' : ''}`}
+              onClick={() => setPaymentMethod('online')}
             >
               <div className="payment-option-radio">
                 <div className="radio-dot"></div>
@@ -281,7 +281,7 @@ console.log('commande id ::'+IDcmd);
           </div>
 
           {/* CARD FORM (Only shows if card is selected) */}
-          {paymentMethod === 'card' && (
+          {paymentMethod === 'online' && (
             <PayPalButton 
         amount={total.toFixed(2)}
         onSuccess={handlePaypalSuccess}

@@ -180,14 +180,17 @@ const fetchAvailableDrivers = async (orderId) => {
     fetchAvailableDrivers(orderId);
   };
 
-  // Assigner un livreur à une commande Assigned Driver	
+  // Assigner un livreur à une commande 
 const handleAssignDriver = async (orderId, driverId) => {
   setAssigningDriver(true);
   setError(null);
 
   try {
     const response = await ClientApi.assignToOrder({ commande_id: orderId, driver_id: driverId });
+    const respone = await ClientApi.PatchStatusCommande(orderId,'Assigned')
     console.log("Assign response:", response);
+        console.log("comande status response:", respone);
+
 
     // Vérifie que la réponse contient bien data
     const resData = response?.data;

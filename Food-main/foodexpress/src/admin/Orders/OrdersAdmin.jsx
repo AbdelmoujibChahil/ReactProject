@@ -32,6 +32,7 @@ import {
   FaTimes,
 } from "react-icons/fa";
 import "./OrdersAdmin.css";
+import { Utensils, DollarSign } from "lucide-react";
 import { ClientApi } from "../../ClientApi/ClientApi";
 
 // ============================================
@@ -117,8 +118,10 @@ function OrdersAdmin() {
     cancelled: [],
   };
 
-  const getStatusConfig = (status) => {
-    const statusLower = status?.toLowerCase() || "pending";
+    const getStatusConfig = (status) => {
+    // Normaliser le statut (gérer null, undefined, etc.)
+    const statusLower = (status || "pending").toString().toLowerCase().trim();
+    
     const configs = {
       preparing: { color: "status-preparing", icon: <UtensilsCrossed size={14} />, label: "Preparing" },
       pending: { color: "status-pending", icon: <Clock size={14} />, label: "Pending" },
@@ -126,6 +129,8 @@ function OrdersAdmin() {
       completed: { color: "status-completed", icon: <CheckCircle size={14} />, label: "Completed" },
       cancelled: { color: "status-cancelled", icon: <XCircle size={14} />, label: "Cancelled" },
     };
+    
+    // Retourner la config ou pending par défaut
     return configs[statusLower] || configs.pending;
   };
 
@@ -311,7 +316,7 @@ function OrdersAdmin() {
       alert("Erreur lors de la suppression");
     }
   };
-
+//image Url
   const getTimeAgo = () => {
     const seconds = Math.floor((new Date() - lastUpdated) / 1000);
     if (seconds < 60) return `${seconds}s`;
